@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+\parindent=0in
+
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{mathtools}
+
+
+\begin{document}
+
+{\centering
+  \rule{6.3in}{2pt}
+  \vspace{0.1em}
+  {\Large
+    CS689: Machine Learning - Fall 2017 \\
+    \textbf{Project Proposal: Supervised Learning of Multiplicative Semantic Word Embeddings from Semantic Entailment Data}\\
+  }
+  \vspace{0.1em}
+  \textbf{Name:} Ao Liu\hspace{20pt}\textbf{SPIRE ID:} 30057749\hspace{20pt}\textbf{Date:} October 20, 2017\\
+  \vspace{0.1em}
+  \rule{6.3in}{1.5pt}
+}
+\vspace{0.1pc}
+
+\textbf{Problem: }A lot of NLP tasks rely word embeddings. Traditionally, word embeddings are trained unsupervisedly on large corpus. This approach has in general worked well on many tasks. However, implementations of this unsupervised approach usually focus on the syntactic representations of words, thus lack of semantic interpretations. Syntactic representations usually follow additive rules, i.e. "king" - "man" + "woman" = "queen". One of the problem is syntactic representations can hardly deal with negation and degree modifiers. Research shows that multiplicative embeddings perform better on semantic tasks, such as entailment. As an important task of semantics, entailment teaches the computer how to understand the meaning of a sentence and the implicit idea behind it. Thus, I want to find a supervised way to train multiplicative semantic word embeddings with the help of paraphrase/entailment dataset. Due to the change on embeddings, I will also implement a new entailment model architecture.\\
+
+\textbf{Methodology: }Bi-LSTMs in general work well on NLP tasks, so my first idea is to apply bi-LSTMs in my system. For word embedding training, I want to minimize the embedding differences between sentence/phrase pairs with same meaning. And then I will use the trained word embeddings to train an entailment model. To implement the system, I'll take the advantage of TensorFlow to help me build deep neural networks and optimize the model.\\
+
+\textbf{Related Work: }As a fundamental task of understanding natural language, semantic entailment is important for the development of semantic representations. Many researchers helped building such datasets \cite{ganitkevitch2013ppdb, bowman2015large}. Work by Wieting et al. shows that we can take the advantage of dataset such as PPDB to learn state-of-the-art word embeddings and compositional models for paraphrase tasks \cite{wieting2015paraphrase}. Previous researches compared point-wise multiplication on word embeddings with other compositional models, and such operation achieves the best performance on semantic tasks \cite{mitchell2008vector, blacoe2012comparison}. Recent researchers also found universal sentence representations trained using the supervised data of SNLI outperforms unsupervised methods on many semantic tasks \cite{conneau2017supervised}.\\
+
+\textbf{Data Sets: }There are mainly two datasets that I may use. One is the Stanford Natural Language Inference (SNLI) corpus, which is a collection of 570k human-written English sentence pairs manually labeled for balanced classification with the labels entailment, contradiction, and neutral, supporting the task of natural language inference (NLI), also known as recognizing textual entailment (RTE). The other is Paraphrase Database (PPDB), which is an extensive semantic resource, consisting of a list of phrase pairs with (heuristic) confidence estimates. The dataset to be used may vary, depending on further exploration and understanding of current chosen ones.\\
+
+\textbf{Experiments: }To evaluate my system, I'll compare the test accuracy of my system on the entailment task with the performances of other models from others, such as the leader board on SNLI's website. I'll also try to plot some embedding examples to show their properties visually.\\
+
+\newpage
+
+\textbf{Overlap Statement: }This project is cross-course, involving CS682: Neural Network and CS689: Machine Learning. The two courses may use the same datasets, so that they may end up with similar evaluation procedure/metrics. The project mainly has two separated directions of development:\\
+\hspace*{0.7cm}\textbf{For CS682: Neural Networks, }I'll focus on the improvement of entailment detection model, including designing and implementing the deep neural network architecture and related experiments.\\
+\hspace*{0.7cm}\textbf{For CS689: Machine Learning, }I'll focus on the improvement of semantic word embedding model, including designing and implementing the learning model and related experiments.
+
+\bibliographystyle{unsrt}
+\bibliography{proposal}
+
+
+\end{document}

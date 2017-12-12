@@ -195,15 +195,15 @@ def fit(data, graph, batch_size=256, embedding_size=100, num_epochs=10, model_di
         writer = codecs.open(embedding_file, 'wb')
         pickle.dump(sess.run(graph['embeddings']), writer)
         writer.close()
-
+        
         writer = codecs.open(loss_file, 'wb')
         pickle.dump(losses, writer)
         writer.close()
-
+        
         writer = codecs.open(acc_file, 'wb')
         pickle.dump(accuracies, writer)
         writer.close()
-
+        
         model_path = saver.save(sess, model_file)
     
     return train_losses, dev_losses, model_path
@@ -231,12 +231,13 @@ if __name__ == '__main__':
     
     batch_size = 256
     embedding_size = 300
-    state_size = 100
+    state_size = 500
     inverse_drop_rate = 0.9
     learning_rate = 3e-3
     
-    graph = build_graph(vocab_size=vocab_size, embedding_size=embedding_size, state_size=100, batch_size=batch_size,
-                        inverse_drop_rate=inverse_drop_rate, learning_rate=learning_rate, num_classes=3)
+    graph = build_graph(vocab_size=vocab_size, embedding_size=embedding_size, state_size=state_size,
+                        batch_size=batch_size, inverse_drop_rate=inverse_drop_rate, learning_rate=learning_rate,
+                        num_classes=3)
     model_dir = '../models/'
     model_path = fit(data, graph, batch_size=batch_size, embedding_size=embedding_size, num_epochs=10,
                      model_dir=model_dir)

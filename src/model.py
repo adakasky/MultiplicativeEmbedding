@@ -233,7 +233,7 @@ if __name__ == '__main__':
     embedding_size = 300
     state_size = 100
     inverse_drop_rate = 0.9
-    learning_rate = 1e-3
+    learning_rate = 3e-3
     
     graph = build_graph(vocab_size=vocab_size, embedding_size=embedding_size, state_size=100, batch_size=batch_size,
                         inverse_drop_rate=inverse_drop_rate, learning_rate=learning_rate, num_classes=3)

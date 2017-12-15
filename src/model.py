@@ -1,3 +1,4 @@
+from __future__ import division, print_function
 import os
 import codecs
 import pickle
@@ -10,7 +11,7 @@ tf.set_random_seed(0)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size=256, inverse_drop_rate=0.9,
+def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size=256, inverse_drop_rate=0.5,
                 learning_rate=1e-4, num_classes=3):
     initializer = tf.contrib.layers.xavier_initializer()
     
@@ -29,6 +30,12 @@ def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size
     
     # Embeddings
     embeddings = tf.Variable(tf.random_uniform([vocab_size, embedding_size], 1.0, -1.0), name="embeddings")
+    # mask embedding for paddings as constant vector of 1
+    embed_mask = np.ones((vocab_size, embedding_size), dtype=np.float32)
+    embed_mask[0] = np.zeros(embedding_size)
+    embed_mask = tf.constant(embed_mask)
+    embeddings = embeddings * embed_mask + (1 - embed_mask)
+    
     sent1 = tf.nn.embedding_lookup(embeddings, X1)
     sent2 = tf.nn.embedding_lookup(embeddings, X2)
     sent1_embed_cont = tf.nn.embedding_lookup(embeddings, X1_embed_cont)
@@ -101,9 +108,9 @@ def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size
     classification_loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=Y))
     
     sent_cont_score = tf.add(tf.reduce_prod(sent1_embed_cont, axis=1), tf.reduce_prod(sent2_embed_cont, axis=1))
-    embed_cont_loss = tf.reduce_sum((sent_cont_score - Y_embed_cont) ** 2)
+    embed_cont_loss = tf.reduce_mean(tf.reduce_sum((sent_cont_score - Y_embed_cont) ** 2, axis=1))
     sent_ent_score = tf.subtract(tf.reduce_prod(sent1_embed_ent, axis=1), tf.reduce_prod(sent2_embed_ent, axis=1))
-    embed_ent_loss = tf.reduce_sum((sent_ent_score - Y_embed_ent) ** 2)
+    embed_ent_loss = tf.reduce_mean(tf.reduce_sum((sent_ent_score - Y_embed_ent) ** 2, axis=1))
     embed_loss = embed_cont_loss + embed_ent_loss
     
     loss = classification_loss + embed_loss
@@ -116,12 +123,15 @@ def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size
             'trainer': trainer, 'preds': preds, 'accuracy': accuracy}
 
 
-def fit(data, graph, batch_size=256, embedding_size=100, num_epochs=10, model_dir='../models/'):
+def fit(data, graph, batch_size=256, embedding_size=100, num_epochs=10, inverse_drop_rate=0.5, model_dir='../models/'):
     saver = tf.train.Saver()
-    embedding_file = model_dir + 'embeddings-%d.pkl' % embedding_size
-    model_file = model_dir + 'model-%d.ckpt' % embedding_size
-    loss_file = model_dir + 'losses-%d.pkl' % embedding_size
-    acc_file = model_dir + 'accuracies-%d.pkl' % embedding_size
+    dir = model_dir + '%d-%.1f/' % (embedding_size, inverse_drop_rate)
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    embedding_file = dir + 'embeddings-%d.pkl' % embedding_size
+    model_file = dir + 'model-%d.ckpt' % embedding_size
+    loss_file = dir + 'losses-%d.pkl' % embedding_size
+    acc_file = dir + 'accuracies-%d.pkl' % embedding_size
     
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
@@ -231,8 +241,8 @@ if __name__ == '__main__':
     
     batch_size = 256
     embedding_size = 300
-    state_size = 500
-    inverse_drop_rate = 0.9
+    state_size = 512
+    inverse_drop_rate = 0.5
     learning_rate = 3e-3
     
     graph = build_graph(vocab_size=vocab_size, embedding_size=embedding_size, state_size=state_size,
@@ -240,7 +250,7 @@ if __name__ == '__main__':
                         num_classes=3)
     model_dir = '../models/'
     model_path = fit(data, graph, batch_size=batch_size, embedding_size=embedding_size, num_epochs=10,
-                     model_dir=model_dir)
+                     inverse_drop_rate=inverse_drop_rate, model_dir=model_dir)
     
     # embeddings = pickle.load(open(embedding_file, 'rb'))
     # a = embeddings[vocab_idx['not']] * embeddings[vocab_idx['like']]

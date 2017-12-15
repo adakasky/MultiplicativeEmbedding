@@ -128,10 +128,10 @@ def fit(data, graph, batch_size=256, embedding_size=100, num_epochs=10, inverse_
     dir = model_dir + '%d-%.1f/' % (embedding_size, inverse_drop_rate)
     if not os.path.exists(dir):
         os.makedirs(dir)
-    embedding_file = dir + 'embeddings-%d.pkl' % embedding_size
-    model_file = dir + 'model-%d.ckpt' % embedding_size
-    loss_file = dir + 'losses-%d.pkl' % embedding_size
-    acc_file = dir + 'accuracies-%d.pkl' % embedding_size
+    embedding_file = dir + 'embeddings.pkl'
+    model_file = dir + 'model.ckpt'
+    loss_file = dir + 'losses.pkl'
+    acc_file = dir + 'accuracies.pkl'
     
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())

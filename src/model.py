@@ -4,14 +4,13 @@ import codecs
 import pickle
 import numpy as np
 import tensorflow as tf
-from scipy.spatial.distance import cosine
 from data import build_vocab, load_vocab, preprocess_snli_jsonl, load_snli, get_padded_batch
 
 tf.set_random_seed(0)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size=256, inverse_drop_rate=0.5,
+def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size=256, inverse_drop_rate=0.9,
                 learning_rate=1e-4, num_classes=3):
     initializer = tf.contrib.layers.xavier_initializer()
     
@@ -123,7 +122,7 @@ def build_graph(vocab_size=30000, embedding_size=100, state_size=100, batch_size
             'trainer': trainer, 'preds': preds, 'accuracy': accuracy}
 
 
-def fit(data, graph, batch_size=256, embedding_size=100, num_epochs=10, inverse_drop_rate=0.5, model_dir='../models/'):
+def fit(data, graph, batch_size=256, embedding_size=100, num_epochs=10, inverse_drop_rate=0.9, model_dir='../models/'):
     saver = tf.train.Saver()
     dir = model_dir + '%d-%.1f/' % (embedding_size, inverse_drop_rate)
     if not os.path.exists(dir):
@@ -242,7 +241,7 @@ if __name__ == '__main__':
     batch_size = 256
     embedding_size = 300
     state_size = 512
-    inverse_drop_rate = 0.5
+    inverse_drop_rate = 0.8
     learning_rate = 3e-3
     
     graph = build_graph(vocab_size=vocab_size, embedding_size=embedding_size, state_size=state_size,

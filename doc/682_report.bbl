@@ -1,0 +1,107 @@
+\begin{thebibliography}{10}
+
+\bibitem{bengio2003neural}
+Yoshua Bengio, R{\'e}jean Ducharme, Pascal Vincent, and Christian Jauvin.
+\newblock A neural probabilistic language model.
+\newblock {\em Journal of machine learning research}, 3(Feb):1137--1155, 2003.
+
+\bibitem{collobert2011natural}
+Ronan Collobert, Jason Weston, L{\'e}on Bottou, Michael Karlen, Koray
+  Kavukcuoglu, and Pavel Kuksa.
+\newblock Natural language processing (almost) from scratch.
+\newblock {\em Journal of Machine Learning Research}, 12(Aug):2493--2537, 2011.
+
+\bibitem{mikolov2013distributed}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In {\em Advances in neural information processing systems}, pages
+  3111--3119, 2013.
+
+\bibitem{pennington2014glove}
+Jeffrey Pennington, Richard Socher, and Christopher Manning.
+\newblock Glove: Global vectors for word representation.
+\newblock In {\em Proceedings of the 2014 conference on empirical methods in
+  natural language processing (EMNLP)}, pages 1532--1543, 2014.
+
+\bibitem{conneau2017supervised}
+Alexis Conneau, Douwe Kiela, Holger Schwenk, Loic Barrault, and Antoine Bordes.
+\newblock Supervised learning of universal sentence representations from
+  natural language inference data.
+\newblock {\em arXiv preprint arXiv:1705.02364}, 2017.
+
+\bibitem{deerwester1990indexing}
+Scott Deerwester, Susan~T Dumais, George~W Furnas, Thomas~K Landauer, and
+  Richard Harshman.
+\newblock Indexing by latent semantic analysis.
+\newblock {\em Journal of the American society for information science},
+  41(6):391, 1990.
+
+\bibitem{deng2009imagenet}
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li~Fei-Fei.
+\newblock Imagenet: A large-scale hierarchical image database.
+\newblock In {\em Computer Vision and Pattern Recognition, 2009. CVPR 2009.
+  IEEE Conference on}, pages 248--255. IEEE, 2009.
+
+\bibitem{bowman2015large}
+Samuel~R Bowman, Gabor Angeli, Christopher Potts, and Christopher~D Manning.
+\newblock A large annotated corpus for learning natural language inference.
+\newblock {\em arXiv preprint arXiv:1508.05326}, 2015.
+
+\bibitem{sharif2014cnn}
+Ali Sharif~Razavian, Hossein Azizpour, Josephine Sullivan, and Stefan Carlsson.
+\newblock Cnn features off-the-shelf: an astounding baseline for recognition.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition workshops}, pages 806--813, 2014.
+
+\bibitem{taigman2014deepface}
+Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, and Lior Wolf.
+\newblock Deepface: Closing the gap to human-level performance in face
+  verification.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 1701--1708, 2014.
+
+\bibitem{antol2015vqa}
+Stanislaw Antol, Aishwarya Agrawal, Jiasen Lu, Margaret Mitchell, Dhruv Batra,
+  C~Lawrence~Zitnick, and Devi Parikh.
+\newblock Vqa: Visual question answering.
+\newblock In {\em Proceedings of the IEEE International Conference on Computer
+  Vision}, pages 2425--2433, 2015.
+
+\bibitem{chung2014empirical}
+Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio.
+\newblock Empirical evaluation of gated recurrent neural networks on sequence
+  modeling.
+\newblock {\em arXiv preprint arXiv:1412.3555}, 2014.
+
+\bibitem{hochreiter1997long}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780, 1997.
+
+\bibitem{dolan2004unsupervised}
+Bill Dolan, Chris Quirk, and Chris Brockett.
+\newblock Unsupervised construction of large paraphrase corpora: Exploiting
+  massively parallel news sources.
+\newblock In {\em Proceedings of the 20th international conference on
+  Computational Linguistics}, page 350. Association for Computational
+  Linguistics, 2004.
+
+\bibitem{levy2014linguistic}
+Omer Levy and Yoav Goldberg.
+\newblock Linguistic regularities in sparse and explicit word representations.
+\newblock In {\em Proceedings of the eighteenth conference on computational
+  natural language learning}, pages 171--180, 2014.
+
+\bibitem{faruqui2016problems}
+Manaal Faruqui, Yulia Tsvetkov, Pushpendre Rastogi, and Chris Dyer.
+\newblock Problems with evaluation of word embeddings using word similarity
+  tasks.
+\newblock {\em arXiv preprint arXiv:1605.02276}, 2016.
+
+\bibitem{kingma2014adam}
+Diederik Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em arXiv preprint arXiv:1412.6980}, 2014.
+
+\end{thebibliography}
